@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "543802032934",
+    "firebase_url": "https://flutter-news-5ccde.firebaseio.com",
+    "project_id": "flutter-news-5ccde",
+    "storage_bucket": "flutter-news-5ccde.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543802032934:android:fe79013c4e2d158c46f7e7",
+        "android_client_info": {
+          "package_name": "cloud.thecode.newsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "543802032934-pu7dlg79ipg1n2o9rgdtl04pv9ollgdk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7RooR7KLVskPmZ4izpO69VTSDkdUElH4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "543802032934-pu7dlg79ipg1n2o9rgdtl04pv9ollgdk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
