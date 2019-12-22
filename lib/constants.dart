@@ -10,9 +10,9 @@ class Constants {
   };
 
   // ROUTE NAMES
+  static const initialRoute = '/';
   static const homePageRoute = '/Home_Page';
   static const newsDetailRoute = '/NewsDetail_Page';
-  static const initialRoute = '/';
 
   // URLs
   static const newsURL =
