@@ -7,12 +7,38 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() {
+
+  
+
   runApp(SplashScreen());
+}
+
+void _setErrorHandler(BuildContext context) {
+  ErrorWidget.builder = (FlutterErrorDetails details) {
+    bool inDebug = false;
+    // assert(() {
+    //   inDebug = true;
+    //   return true;
+    // }());
+    // In debug mode, use the normal error widget which shows
+    // the error message:
+    if (inDebug) return ErrorWidget(details.exception);
+    // In release builds, show a yellow-on-blue message instead:
+    return Container(
+      alignment: Alignment.center,
+      child: Text(
+        'An error has occured, Please restart the app.',
+        style: TextStyle(color: Colors.grey),
+        textDirection: TextDirection.ltr,
+      ),
+    );
+  };
 }
 
 class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    _setErrorHandler(context);
     return MaterialApp(
       initialRoute: Constants.initialRoute,
       routes: Constants.routes,
@@ -65,7 +91,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
 
   _loadHomePage() async {
     Timer(Duration(seconds: 2), () {
-      Navigator.of(context).pushReplacementNamed('/Home_Page');
+      Navigator.of(context).pushReplacementNamed(Constants.homePageRoute);
     });
   }
 

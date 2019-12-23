@@ -6,7 +6,7 @@
  */
 
 import 'dart:convert';
-import 'package:newsdesign/blueprints/News.dart';
+import 'package:newsdesign/blueprints/news.dart';
 
 class Parser {
 
