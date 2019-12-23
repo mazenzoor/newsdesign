@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>543802032934-cp1cbe4gevj36rbs08j0k4c71p5d0bmm.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.543802032934-cp1cbe4gevj36rbs08j0k4c71p5d0bmm</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDFYv-L1553UK2rz1LSoLQvvDjEveYa8KU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>543802032934</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>cloud.thecode.newsapp</string>
+	<key>PROJECT_ID</key>
+	<string>flutter-news-5ccde</string>
+	<key>STORAGE_BUCKET</key>
+	<string>flutter-news-5ccde.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:543802032934:ios:5b8d556582d1f1a246f7e7</string>
+	<key>DATABASE_URL</key>
+	<string>https://flutter-news-5ccde.firebaseio.com</string>
+</dict>
+</plist>
