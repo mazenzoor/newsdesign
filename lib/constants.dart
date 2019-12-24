@@ -16,7 +16,7 @@ class Constants {
 
   // URLs
   static const newsURL =
-      "https://raw.githubusercontent.com/mzpro10/FilesIDon-tNeed/master/news.json";
+      "http://www.elnashra.com/app/v2.0/json/newsfeed7.json";
 
   // MEASUREMENTS
   static const headerImageHeight = 250.0;

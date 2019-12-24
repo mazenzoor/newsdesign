@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:newsdesign/blueprints/News.dart';
+import 'package:newsdesign/blueprints/news.dart';
 import 'package:newsdesign/constants.dart';
 import 'package:newsdesign/services/online.dart';
 import 'package:newsdesign/services/parser.dart';
@@ -112,6 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
       endDrawer: _buildNavigationDrawer(context),
 
       body: SafeArea(
+        bottom: false,
         // ScrollView
         child: SmartRefresher(
           enablePullDown: true,
@@ -389,8 +390,9 @@ class _MyHomePageState extends State<MyHomePage> {
                             //
                             // News Item Date
                             Text(
-                              "Jan 1",
+                              Parser.dateDiffString(temporary.createDate, temporary.createDateAR),
                               textAlign: TextAlign.right,
+                              textDirection: TextDirection.rtl,
                               style: GoogleFonts.cairo(
                                 fontWeight: FontWeight.bold,
                                 textStyle: TextStyle(
