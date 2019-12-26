@@ -57,7 +57,6 @@ class Parser {
       switch (dur) {
         case 0:
           List datetime = currentDate.split(" ");
-          print(datetime[1]);
           String time = datetime[1].toString().substring(0, 5);
           return time;
           break;
