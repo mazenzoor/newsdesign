@@ -65,7 +65,7 @@ Widget _buildTitle(BuildContext context, News newsItem) {
       child: Text(newsItem.title,
           textDirection: TextDirection.rtl,
           textAlign: TextAlign.justify,
-          style: GoogleFonts.cairo(
+          style: GoogleFonts.almarai(
             fontSize: 18.0,
             fontWeight: FontWeight.bold,
           )),
@@ -88,7 +88,7 @@ Widget _buildNewsInfo(BuildContext context, News newsItem) {
               color: Colors.orange,
               child: Text(
                 newsItem.category,
-                style: GoogleFonts.cairo(
+                style: GoogleFonts.almarai(
                     fontSize: 13.0, textStyle: TextStyle(color: Colors.white)),
               )),
         ),
@@ -97,7 +97,7 @@ Widget _buildNewsInfo(BuildContext context, News newsItem) {
           children: <Widget>[
             Text(
               newsItem.createDateAR,
-              style: GoogleFonts.cairo(
+              style: GoogleFonts.almarai(
                   fontWeight: FontWeight.bold,
                   fontSize: 13.0,
                   textStyle: TextStyle(color: Colors.grey[400])),
@@ -134,7 +134,7 @@ Widget _buildNewsAuthor(BuildContext context, News newsItem) {
             SizedBox(width: 8),
             Text(
               "share",
-              style: GoogleFonts.cairo(
+              style: GoogleFonts.almarai(
                   fontSize: 15.0,
                   textStyle: TextStyle(color: Colors.grey[400])),
             )
@@ -146,7 +146,7 @@ Widget _buildNewsAuthor(BuildContext context, News newsItem) {
             children: <Widget>[
               Text(
                 newsItem.author,
-                style: GoogleFonts.cairo(
+                style: GoogleFonts.almarai(
                   fontSize: 14.0,
                   textStyle: TextStyle(color: Colors.grey[500]),
                 ),

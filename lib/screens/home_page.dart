@@ -70,9 +70,6 @@ class _MyHomePageState extends State<MyHomePage> {
     // Using local data for header
     _reloadHeader();
 
-    // Simulate loader delay
-    await Future.delayed(Duration(milliseconds: 500));
-
     // Refresh completed
     _refreshController.refreshCompleted();
   }
@@ -117,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: SmartRefresher(
           enablePullDown: true,
           enablePullUp: false,
-          header: MaterialClassicHeader(),
+          header: ClassicHeader(),
           footer: _buildLoadMoreFooter(context),
           controller: _refreshController,
           onRefresh: _onRefresh,
@@ -139,6 +136,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
                     // New Carousel
                     _buildNewsCarousel(context),
+
+                    // Height
+                    SizedBox(height: 15),
 
                     // Latest News Title
                     _buildLatestNewsTitle(context),
@@ -297,8 +297,9 @@ class _MyHomePageState extends State<MyHomePage> {
         Expanded(
           child: Text(
             "آخر الاخبار",
+            
             textAlign: TextAlign.right,
-            style: GoogleFonts.cairo(
+            style: GoogleFonts.almarai(
               fontSize: 20,
               fontWeight: FontWeight.bold,
               textStyle: TextStyle(
@@ -308,7 +309,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         SizedBox(
-          width: 10,
+          width: 10
         ),
         Icon(Icons.lightbulb_outline)
       ],
@@ -378,22 +379,23 @@ class _MyHomePageState extends State<MyHomePage> {
                             // News Item Title
                             Text(
                               temporary.title,
-                              textAlign: TextAlign.justify,
+                              textAlign: TextAlign.right,
                               textDirection: TextDirection.rtl,
-                              style: GoogleFonts.cairo(
+                              style: GoogleFonts.almarai(
                                 textStyle: TextStyle(
                                   fontSize: 14.0,
                                   color: Colors.black,
                                 ),
                               ),
                             ),
+                            SizedBox(height: 10),
                             //
                             // News Item Date
                             Text(
                               Parser.dateDiffString(temporary.createDate, temporary.createDateAR),
                               textAlign: TextAlign.right,
                               textDirection: TextDirection.rtl,
-                              style: GoogleFonts.cairo(
+                              style: GoogleFonts.almarai(
                                 fontWeight: FontWeight.bold,
                                 textStyle: TextStyle(
                                   fontSize: 13.0,
