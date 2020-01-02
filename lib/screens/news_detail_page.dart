@@ -184,7 +184,6 @@ Widget _builderNewsBody(BuildContext context, News newsItem) {
         onLinkTap: (url) {
           // Append el nashra domain to the url
           url = "http://elnashra.com" + url;
-          print("Your link: $url");
         },
         defaultTextStyle: GoogleFonts.almarai(
           textStyle: TextStyle(
