@@ -28,6 +28,7 @@ class _NewsDetailState extends State<NewsDetail> {
                   _buildNewsAuthor(context, news),
                   _divider(),
                   _builderNewsBody(context, news),
+                  Constants.space,
                 ],
               ),
             )
@@ -49,9 +50,16 @@ SliverAppBar _buildSliverAppBar(BuildContext context, News newsItem) {
     ),
     centerTitle: true,
     iconTheme: IconThemeData(color: Constants.elNashraRed),
-    expandedHeight: Constants.headerImageHeight,
+    expandedHeight:
+        Constants.getScreenWidth(context) * Constants.imageAspectRatio,
     flexibleSpace: FlexibleSpaceBar(
-      background: _buildSliverBackground(newsItem.pictureURL, newsItem.videoURL),
+      background: GestureDetector(
+          onTap: () {
+            // Open Image in Image View
+            Navigator.pushNamed(context, Constants.viewImageRoute, arguments: {'url': newsItem.pictureURL});
+          },
+          child:
+              _buildSliverBackground(newsItem.pictureURL, newsItem.videoURL)),
     ),
   );
 }
@@ -65,7 +73,7 @@ Widget _buildTitle(BuildContext context, News newsItem) {
       child: Text(newsItem.title,
           textDirection: TextDirection.rtl,
           textAlign: TextAlign.justify,
-          style: GoogleFonts.almarai(
+          style: GoogleFonts.cairo(
             fontSize: 18.0,
             fontWeight: FontWeight.bold,
           )),
@@ -88,7 +96,7 @@ Widget _buildNewsInfo(BuildContext context, News newsItem) {
               color: Colors.orange,
               child: Text(
                 newsItem.category,
-                style: GoogleFonts.almarai(
+                style: GoogleFonts.cairo(
                     fontSize: 13.0, textStyle: TextStyle(color: Colors.white)),
               )),
         ),
@@ -97,7 +105,7 @@ Widget _buildNewsInfo(BuildContext context, News newsItem) {
           children: <Widget>[
             Text(
               newsItem.createDateAR,
-              style: GoogleFonts.almarai(
+              style: GoogleFonts.cairo(
                   fontWeight: FontWeight.bold,
                   fontSize: 13.0,
                   textStyle: TextStyle(color: Colors.grey[400])),
@@ -124,7 +132,9 @@ Widget _buildNewsAuthor(BuildContext context, News newsItem) {
       children: <Widget>[
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: newsItem.author == '' ? MainAxisAlignment.center : MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: newsItem.author == ''
+              ? MainAxisAlignment.center
+              : MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Icon(
               Icons.share,
@@ -134,7 +144,7 @@ Widget _buildNewsAuthor(BuildContext context, News newsItem) {
             SizedBox(width: 8),
             Text(
               "share",
-              style: GoogleFonts.almarai(
+              style: GoogleFonts.cairo(
                   fontSize: 15.0,
                   textStyle: TextStyle(color: Colors.grey[400])),
             )
@@ -146,7 +156,7 @@ Widget _buildNewsAuthor(BuildContext context, News newsItem) {
             children: <Widget>[
               Text(
                 newsItem.author,
-                style: GoogleFonts.almarai(
+                style: GoogleFonts.cairo(
                   fontSize: 14.0,
                   textStyle: TextStyle(color: Colors.grey[500]),
                 ),
@@ -162,11 +172,11 @@ Widget _buildNewsAuthor(BuildContext context, News newsItem) {
 }
 
 Widget _buildSliverBackground(String imageURL, String videoURL) {
-  if(videoURL == null || videoURL.isEmpty) {
+  if (videoURL == null || videoURL.isEmpty) {
     return Image(
-        image: NetworkImage(imageURL),
-        fit: BoxFit.cover,
-      );
+      image: NetworkImage(imageURL),
+      fit: BoxFit.cover,
+    );
   } else {
     return Text("IMPLEMENT VIDEO");
   }
@@ -185,10 +195,13 @@ Widget _builderNewsBody(BuildContext context, News newsItem) {
           // Append el nashra domain to the url
           url = "http://elnashra.com" + url;
         },
-        defaultTextStyle: GoogleFonts.almarai(
+        onImageTap: (url) {
+            // Open Image in Image View
+            Navigator.pushNamed(context, Constants.viewImageRoute, arguments: {'url': url});
+        },
+        defaultTextStyle: GoogleFonts.cairo(
           textStyle: TextStyle(
             color: Colors.grey[800],
-            height: 1.5,
             fontSize: 17.0,
           ),
         ),

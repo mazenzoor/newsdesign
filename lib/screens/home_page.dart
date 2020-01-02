@@ -299,7 +299,7 @@ class _MyHomePageState extends State<MyHomePage> {
             "آخر الاخبار",
             
             textAlign: TextAlign.right,
-            style: GoogleFonts.almarai(
+            style: GoogleFonts.cairo(
               fontSize: 20,
               fontWeight: FontWeight.bold,
               textStyle: TextStyle(
@@ -381,7 +381,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               temporary.title,
                               textAlign: TextAlign.right,
                               textDirection: TextDirection.rtl,
-                              style: GoogleFonts.almarai(
+                              style: GoogleFonts.cairo(
                                 textStyle: TextStyle(
                                   fontSize: 14.0,
                                   color: Colors.black,
@@ -395,7 +395,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               Parser.dateDiffString(temporary.createDate, temporary.createDateAR),
                               textAlign: TextAlign.right,
                               textDirection: TextDirection.rtl,
-                              style: GoogleFonts.almarai(
+                              style: GoogleFonts.cairo(
                                 fontWeight: FontWeight.bold,
                                 textStyle: TextStyle(
                                   fontSize: 13.0,
