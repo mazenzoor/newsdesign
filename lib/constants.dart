@@ -19,7 +19,8 @@ class Constants {
 
   // URLs
   static const newsURL =
-      "http://www.elnashra.com/app/v2.0/json/newsfeed7.json";
+      "http://www.elnashra.com/app/v2.0/json/newsfeed.json";
+  static const sliderURL = "http://www.elnashra.com/app/v2.0/json/slider.json";
 
   // MEASUREMENTS
   static const headerImageHeight = 290.0;

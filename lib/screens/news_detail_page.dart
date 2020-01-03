@@ -184,7 +184,6 @@ Widget _buildSliverBackground(String imageURL, String videoURL) {
 
 Widget _builderNewsBody(BuildContext context, News newsItem) {
   String html = newsItem.content;
-
   return Container(
     child: Directionality(
       textDirection: TextDirection.rtl,
@@ -209,7 +208,7 @@ Widget _builderNewsBody(BuildContext context, News newsItem) {
           return TextAlign.justify;
         },
         linkStyle: TextStyle(
-          color: Constants.elNashraRed,
+          color: Colors.red,
         ),
       ),
     ),

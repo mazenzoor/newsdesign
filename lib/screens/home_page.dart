@@ -385,6 +385,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 textStyle: TextStyle(
                                   fontSize: 14.0,
                                   color: Colors.black,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
@@ -416,7 +417,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           placeholder: 'assets/placeholder.jpg',
                           image: temporary.pictureURL,
                           width: 120,
-                          height: 80,
+                          height: 90,
                           fit: BoxFit.cover,
                         ),
                       ),
