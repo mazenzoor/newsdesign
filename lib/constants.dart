@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:newsdesign/screens/Home_Page.dart';
-import 'package:newsdesign/screens/news_detail_page.dart';
-import 'package:newsdesign/screens/view_image_page.dart';
+import 'package:newsdesign/pages/Home_Page.dart';
+import 'package:newsdesign/pages/news_detail_page.dart';
+import 'package:newsdesign/pages/view_image_page.dart';
 
 class Constants {
   // ROUTES MAP
