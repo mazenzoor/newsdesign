@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:newsdesign/blueprints/news.dart';
+import 'package:newsdesign/model/news.dart';
 import 'package:newsdesign/constants.dart';
 import 'package:newsdesign/services/online.dart';
 import 'package:newsdesign/services/parser.dart';

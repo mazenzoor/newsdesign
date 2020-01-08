@@ -1,12 +1,12 @@
 /*
  * parser.dart
  * ----------------
- * Parses all types of data/strings to Objects(blueprints)
+ * Parses all types of data/strings to Objects(models)
  * 
  */
 
 import 'dart:convert';
-import 'package:newsdesign/blueprints/news.dart';
+import 'package:newsdesign/model/news.dart';
 
 class Parser {
   // Method to parse JSON string to News objects list
