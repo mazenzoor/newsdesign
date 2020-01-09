@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -7,9 +6,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() {
-
-  
-
   runApp(SplashScreen());
 }
 
@@ -24,12 +20,21 @@ void _setErrorHandler(BuildContext context) {
     // the error message:
     if (inDebug) return ErrorWidget(details.exception);
     // In release builds, show a yellow-on-blue message instead:
-    return Container(
-      alignment: Alignment.center,
-      child: Text(
-        'An error has occured, Please restart the app.',
-        style: TextStyle(color: Colors.grey),
-        textDirection: TextDirection.ltr,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(
+          child: Container(
+            height: 20,
+            alignment: Alignment.center,
+            child: Text(
+              'An error has occured, Please restart the app.',
+              style: TextStyle(color: Colors.black),
+              textDirection: TextDirection.ltr,
+            ),
+          ),
+        ),
       ),
     );
   };
@@ -62,12 +67,10 @@ class MySplashScreen extends StatefulWidget {
 }
 
 class _MySplashScreenState extends State<MySplashScreen> {
-
   // FCM
   final Firestore _db = Firestore.instance;
   final FirebaseMessaging _fcm = FirebaseMessaging();
   StreamSubscription iosSubscription;
-
 
   @override
   void initState() {
@@ -75,19 +78,17 @@ class _MySplashScreenState extends State<MySplashScreen> {
 
     // Get Notification Permission if IOS
 
-    if(Platform.isIOS) {
+    if (Platform.isIOS) {
       iosSubscription = _fcm.onIosSettingsRegistered.listen((data) {
         // Save the token OR subscribe to a topic here
         _fcm.subscribeToTopic('Breaking News');
       });
 
       _fcm.requestNotificationPermissions(IosNotificationSettings());
-
     }
 
     _loadHomePage();
   }
-
 
   _loadHomePage() async {
     Timer(Duration(seconds: 2), () {
@@ -107,9 +108,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Image.asset('assets/logo.png')
-            ],
+            children: <Widget>[Image.asset('assets/logo.png')],
           ),
         ),
       ),

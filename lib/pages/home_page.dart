@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:newsdesign/globals.dart';
 import 'package:newsdesign/model/news.dart';
 import 'package:newsdesign/constants.dart';
 import 'package:newsdesign/services/online.dart';
@@ -51,6 +52,10 @@ class _MyHomePageState extends State<MyHomePage> {
         // Parse json to list of News
         newsData = Parser.jsonToNews(json);
 
+        // Update the Global news list
+        Globals.newsList = newsData;
+        Globals.storyList = newsData.sublist(0, 8);
+
         // Update the UI
         setState(() {});
       } catch (e) {
@@ -67,34 +72,9 @@ class _MyHomePageState extends State<MyHomePage> {
     // monitor network fetch
     await getNewsData();
 
-    // Using local data for header
-    _reloadHeader();
-
     // Refresh completed
     _refreshController.refreshCompleted();
   }
-
-  /* (start) Code to be re-written */
-
-  int _currentIndex = 0;
-
-  List banner = [
-    'https://static.adweek.com/adweek.com-prod/wp-content/uploads/2019/10/data-brands-politics-hero-2019.png',
-    'https://static01.nyt.com/images/2019/12/18/us/politics/18dc-impeach-trump1/18dc-impeach-trump1-videoLarge-v2.jpg'
-  ];
-
-  List bannerTitles = [
-    "اتحاد جمعيات العائلات البيروتية: تكليف دياب خرق فاضح للميثاقية الوطنية",
-    "مقتل 6 أشخاص وإصابة 5 آخرين في حادث تصادم قطار بسيارة شمال مصر"
-  ];
-
-  void _reloadHeader() async {
-    setState(() {
-      _currentIndex = _currentIndex == 1 ? 0 : _currentIndex + 1;
-    });
-  }
-
-  /* (end) Code to be re-written */
 
   @override
   Widget build(BuildContext context) {
@@ -125,29 +105,24 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Container(
               // Main background color
               color: Constants.elNashraBackground,
-              child: Padding(
-                // Padding of page
-                padding: Constants.elNashraHorizontalPadding,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    // Top Header (menu, logo, search)
-                    _buildTopHeader(context),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  // Top Header (menu, logo, search)
+                  _buildTopHeader(context),
 
-                    // New Carousel
-                    _buildNewsCarousel(context),
+                  // Stories
+                  _buildNewsStories(context),
 
-                    // Height
-                    SizedBox(height: 15),
+                  // Height
+                  SizedBox(height: 15),
 
-                    // Latest News Title
-                    _buildLatestNewsTitle(context),
+                  // Latest News Title
+                  _buildLatestNewsTitle(context),
 
-                    // Latest News List
-                    _buildNewsListView(context),
-                    
-                  ],
-                ),
+                  // Latest News List
+                  _buildNewsListView(context),
+                ],
               ),
             ),
           ),
@@ -228,95 +203,57 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget _buildNewsCarousel(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.all(Radius.circular(16.0)),
-      // Main News Header and News Carousel
-      child: GestureDetector(
-          onHorizontalDragStart: (DragStartDetails start) => _reloadHeader(),
-          child: Stack(
-            children: <Widget>[
-              Container(
-                width: MediaQuery.of(context).size.width,
-                child: FadeInImage.assetNetwork(
-                  height: Constants.carouselHeight,
-                  placeholder: Constants.placeholder,
-                  image: banner[_currentIndex],
-                  fit: BoxFit.cover,
-                ),
-              ),
-              Positioned(
-                bottom: 0.0,
-                right: 0.0,
-                left: 0.0,
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Color.fromARGB(0, 0, 0, 0),
-                          Color.fromARGB(200, 0, 0, 0)
-                        ]),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(12.0, 30, 12, 12),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        //
-                        // Main Header Title
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            bannerTitles[_currentIndex],
-                            style: GoogleFonts.cairo(
-                              textStyle: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            textAlign: TextAlign.right,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          )),
+  Widget _buildNewsStories(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.fromLTRB(0, 12.0, 0, 6.0),
+      height: Constants.storiesContainerHeight,
+      child: ListView.builder(
+        itemCount: Constants.newsOffset,
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        reverse: true,
+        itemBuilder: (context, index) {
+          News currentNews = newsData[index];
+          return Story(currentNews, index);
+        },
+      ),
     );
   }
 
   Widget _buildLatestNewsTitle(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Expanded(
-          child: Text(
-            "آخر الاخبار",
-            
-            textAlign: TextAlign.right,
-            style: GoogleFonts.cairo(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              textStyle: TextStyle(
-                color: Colors.black,
+    return Padding(
+      padding:
+          const EdgeInsets.symmetric(horizontal: Constants.horizontalPadding),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Text(
+              "آخر الاخبار",
+              textAlign: TextAlign.right,
+              style: GoogleFonts.cairo(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                textStyle: TextStyle(
+                  color: Colors.black,
+                ),
               ),
             ),
           ),
-        ),
-        SizedBox(
-          width: 10
-        ),
-        Icon(Icons.lightbulb_outline)
-      ],
+          SizedBox(width: 10),
+          Icon(Icons.lightbulb_outline)
+        ],
+      ),
     );
   }
 
   Widget _buildNewsListView(BuildContext context) {
+    // If news list is still empty show loading
+    if (newsData.length == 0) {
+      return Container(
+        child: Text("Loading News"),
+      );
+    }
+
     // Ads list for UI testing
     List ads = ["Space for Ad 1", "Space for Ad 2", "Space for Ads 3"];
 
@@ -326,7 +263,9 @@ class _MyHomePageState extends State<MyHomePage> {
     // Place ad between news list items on some index
     shouldBuildAd(int index) {
       // test if correct position for ad and there is still ads
-      if (index != 0 && index % 3 == 0 && adsIndex < ads.length) {
+      if (index != 0 &&
+          index % Constants.adsPlacementIndex == 0 &&
+          adsIndex < ads.length) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 20.0),
           child: ClipRRect(
@@ -344,6 +283,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     return ListView.builder(
+      padding: EdgeInsets.symmetric(horizontal: Constants.horizontalPadding),
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       itemCount: newsData.length,
@@ -393,7 +333,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             //
                             // News Item Date
                             Text(
-                              Parser.dateDiffString(temporary.createDate, temporary.createDateAR),
+                              Parser.dateDiffString(
+                                  temporary.createDate, temporary.createDateAR),
                               textAlign: TextAlign.right,
                               textDirection: TextDirection.rtl,
                               style: GoogleFonts.cairo(
@@ -455,3 +396,127 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 } /* end state */
+
+/* Own state management for Story */
+class Story extends StatefulWidget {
+  final News currentNews;
+  final int index;
+  const Story(this.currentNews, this.index);
+
+  @override
+  _StoryState createState() => _StoryState();
+}
+
+class _StoryState extends State<Story> with SingleTickerProviderStateMixin {
+  double _scale;
+  AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    // Init animation controller for stories
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 100),
+      lowerBound: 0.0,
+      upperBound: 0.08,
+    )..addListener(() {
+        setState(() {});
+      });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    _scale = 1 - _controller.value;
+    return Transform.scale(
+      scale: _scale,
+      child: Container(
+        width: Constants.storyWidth,
+        height: Constants.storyHeight,
+        margin: EdgeInsets.fromLTRB(0, 0, 12.0, 0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(16.0)),
+          // Story image and title with gesture detection
+          child: GestureDetector(
+              onTapUp: (_) {
+                _controller.reverse();
+
+                print(_scale);
+              },
+              onTapDown: (_) {
+                _controller.forward();
+                print(_scale);
+              },
+              onTapCancel: () {
+                _controller.reverse();
+              },
+              // Navigate to Story View on tap
+              onTap: () {
+                Navigator.pushNamed(context, Constants.storyViewRoute,
+                    arguments: widget.index);
+              },
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    // Image of Story
+                    child: FadeInImage.assetNetwork(
+                      height: Constants.storyHeight,
+                      placeholder: Constants.placeholder,
+                      image: widget.currentNews.pictureURL,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 0.0,
+                    right: 0.0,
+                    left: 0.0,
+                    top: 0.0,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Color.fromARGB(0, 0, 0, 0),
+                              Color.fromARGB(220, 0, 0, 0)
+                            ]),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          //
+                          // Main Header Title
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 12.0, vertical: 18.0),
+                            child: Text(
+                              widget.currentNews.title,
+                              textDirection: TextDirection.rtl,
+                              style: GoogleFonts.cairo(
+                                textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 9.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              textAlign: TextAlign.right,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              )),
+        ),
+      ),
+    );
+  }
+}
