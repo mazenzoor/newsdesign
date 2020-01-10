@@ -16,7 +16,6 @@ class _StoryViewState extends State<StoryView> {
 
     return Scaffold(
       body: Container(
-        
         child: FadeInImage.assetNetwork(
           height: Constants.storyHeight,
           placeholder: Constants.placeholder,

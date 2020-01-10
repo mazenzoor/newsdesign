@@ -1,0 +1,21 @@
+<actions>
+    <action intentName="actions.intent.CREATE_MONEY_TRANSFER">
+        <fulfillment  urlTemplate="https://skash.com/pay{?currency,value,name}">
+            <parameter-mapping
+                intentParameter="moneyTransfer.amount.currency"
+                urlParameter="currency"
+                required="true"
+                />
+            <parameter-mapping
+                intentParameter="moneyTransfer.amount.value"
+                urlParameter="value"
+                required="true"
+                />
+            <parameter-mapping
+                intentParameter="moneyTransfer.moneyTransferDestination.name"
+                urlParameter="name"
+                required="true"
+                />
+        </fulfillment>
+    </action>
+</actions>
